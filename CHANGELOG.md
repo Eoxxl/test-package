@@ -1,5 +1,11 @@
 # hello-lib
 
+## 1.1.2
+
+### Patch Changes
+
+- a55890b: add 3
+
 ## 1.1.1
 
 ### Patch Changes
