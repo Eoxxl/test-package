@@ -3,6 +3,8 @@ name: Create Release PR
 on:
   push:
     branches: [master]
+    paths:
+      - '.changeset/**'
 
 jobs:
   version:
