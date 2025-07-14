@@ -1,5 +1,11 @@
 # hello-lib
 
+## 1.1.0
+
+### Minor Changes
+
+- b4b4fdd: some delete
+
 ## 1.0.0
 
 ### Major Changes
