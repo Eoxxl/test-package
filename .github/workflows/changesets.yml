@@ -29,7 +29,7 @@ jobs:
 
       - run: npm ci
 
-      - name: Run version bump and tag
+      - name: Run version bump version
         run: |
           npx changeset version
           git config user.name "github-actions[bot]"
