@@ -25,8 +25,7 @@
     "build": "npm run clean && npm run gen:mod && tsup",
     "clean": "rm -rf build && rm -f ./mod.ts",
     "prepack": "npm run build",
-    "release": "changeset version && git add . && git commit -m 'release: version bump' && git push",
-    "changeset": "changeset"
+    "chs": "changeset"
   },
   "files": [
     "build"
