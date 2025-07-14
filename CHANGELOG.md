@@ -1,5 +1,11 @@
 # hello-lib
 
+## 1.2.0
+
+### Minor Changes
+
+- d3cd412: awdaw
+
 ## 1.1.9
 
 ### Patch Changes
