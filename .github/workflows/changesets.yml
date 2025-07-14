@@ -2,11 +2,11 @@ name: Create Release PR
 
 on:
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   version:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
 
     steps:
