@@ -1,5 +1,11 @@
 # hello-lib
 
+## 1.1.1
+
+### Patch Changes
+
+- 5298692: new patch
+
 ## 1.1.0
 
 ### Minor Changes
