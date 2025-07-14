@@ -51,6 +51,11 @@ jobs:
           mkdir -p dist
           mv *.tgz dist/
 
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.ref }}
+
       - name: Upload .tgz to GitHub Releases
         uses: softprops/action-gh-release@v1
         with:
