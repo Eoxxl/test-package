@@ -1,4 +1,4 @@
-name: Create Release PR
+name: Version & Release
 
 on:
   push:
@@ -7,12 +7,15 @@ on:
       - '.changeset/**'
 
 jobs:
-  version:
+  version-and-release:
     if: |
       github.ref == 'refs/heads/master' &&
-      !contains(join(github.event.commits.*.message), 'Version Packages') &&
-      !contains(join(github.event.commits.*.message), 'Release')
+      !contains(join(github.event.commits.*.message), 'Version Packages')
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      packages: write
 
     steps:
       - uses: actions/checkout@v4
@@ -25,14 +28,11 @@ jobs:
 
       - run: npm ci
 
-      - uses: changesets/action@v1
-        with:
-          publish: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Push version tags
+      - name: Run version bump and tag
         run: |
+          npx changeset version
           git config user.name "github-actions[bot]"
-          git config user.email "justabot@bot.justabot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -am "Version Packages"
+          git tag v$(node -p "require('./package.json').version")
           git push --follow-tags
