@@ -39,8 +39,13 @@ jobs:
           git push origin HEAD
           git push origin v$VERSION
 
-      - name: Pack as .tgz
-        run: npm pack --pack-destination dist
+      - name: Pack
+        run: npm pack
+
+      - name: Move .tgz to dist
+        run: |
+          mkdir -p dist
+          mv *.tgz dist/
 
       - name: Upload .tgz to GitHub Releases
         uses: softprops/action-gh-release@v1
