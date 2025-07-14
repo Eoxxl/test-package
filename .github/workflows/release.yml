@@ -1,0 +1,40 @@
+name: Release on tag
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          registry-url: 'https://npm.pkg.github.com/'
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Pack as .tgz
+        run: npm pack --pack-destination dist
+
+      - name: Upload .tgz to GitHub Releases
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/*.tgz
+
+      - name: Publish to GitHub Packages
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
