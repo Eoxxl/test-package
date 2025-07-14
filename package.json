@@ -1,0 +1,39 @@
+{
+  "name": "hello-lib",
+  "version": "0.0.2",
+  "author": "",
+  "license": "ISC",
+  "description": "Test package",
+  "main": "build/hello.js",
+  "module": "build/hello.mjs",
+  "types": "./build/hello.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./build/hello.d.ts",
+        "default": "./build/hello.mjs"
+
+      },
+      "require": {
+        "types": "./build/hello.d.ts",
+        "default": "./build/hello.js"
+      }
+    }
+  },
+  "scripts": {
+    "gen:mod": "node build_utils/create_mod.js",
+    "build": "npm run clean && npm run gen:mod && tsup",
+    "clean": "rm -rf build && rm -f ./mod.ts"
+  },
+  "files": [
+    "build"
+  ],
+  "devDependencies": {
+    "@types/node": "^24.0.13",
+    "glob": "^11.0.3",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  }
+}
