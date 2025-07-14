@@ -1,12 +1,14 @@
-name: Release on tag
+name: Release with tag
 
 on:
-  push:
-    tags:
-      - 'v*'
+  workflow_run:
+    workflows: [ "Version & Release" ]
+    types:
+      - completed
 
 jobs:
   release:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     permissions:
@@ -25,6 +27,17 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+
+      - name: Push release tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -am "Release Packages"
+          VERSION=$(node -p "require('./package.json').version")
+          git tag v$VERSION
+          git push origin HEAD
+          git push origin v$VERSION
 
       - name: Pack as .tgz
         run: npm pack --pack-destination dist

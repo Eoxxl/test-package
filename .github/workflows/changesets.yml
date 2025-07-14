@@ -10,7 +10,8 @@ jobs:
   version-and-release:
     if: |
       github.ref == 'refs/heads/master' &&
-      !contains(join(github.event.commits.*.message), 'Version Packages')
+      !contains(join(github.event.commits.*.message), 'Version Packages') &&
+      !contains(join(github.event.commits.*.message), 'Release Packages')
     runs-on: ubuntu-latest
 
     permissions:
@@ -35,7 +36,4 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -am "Version Packages"
-          VERSION=$(node -p "require('./package.json').version")
-          git tag v$VERSION
           git push origin HEAD
-          git push origin v$VERSION
