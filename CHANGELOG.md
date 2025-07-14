@@ -1,5 +1,11 @@
 # hello-lib
 
+## 1.1.9
+
+### Patch Changes
+
+- 86af4c3: awdawdawd
+
 ## 1.1.8
 
 ### Patch Changes
