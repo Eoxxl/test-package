@@ -1,5 +1,11 @@
 # hello-lib
 
+## 1.1.3
+
+### Patch Changes
+
+- 33a9eef: 4
+
 ## 1.1.2
 
 ### Patch Changes
