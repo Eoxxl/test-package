@@ -1,5 +1,11 @@
 # hello-lib
 
+## 1.2.1
+
+### Patch Changes
+
+- 6d8d701: awdawd
+
 ## 1.2.0
 
 ### Minor Changes
