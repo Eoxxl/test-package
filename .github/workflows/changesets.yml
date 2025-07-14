@@ -10,8 +10,8 @@ jobs:
   version:
     if: |
       github.ref == 'refs/heads/master' &&
-      github.event.head_commit.message != 'Version Packages' &&
-      github.event.head_commit.message != 'Release'
+      !contains(join(github.event.commits.*.message), 'Version Packages') &&
+      !contains(join(github.event.commits.*.message), 'Release')
     runs-on: ubuntu-latest
 
     steps:
