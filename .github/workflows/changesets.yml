@@ -3,14 +3,13 @@ name: Create Release PR
 on:
   push:
     branches: [master]
-    paths:
-      - '.changeset/**'
 
 jobs:
   version:
     if: |
+      github.ref == 'refs/heads/master' &&
       github.event.head_commit.message != 'Version Packages' &&
-      github.ref == 'refs/heads/master'
+      github.event.head_commit.message != 'Release'
     runs-on: ubuntu-latest
 
     steps:
@@ -29,3 +28,9 @@ jobs:
           publish: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push version tags
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "justabot@bot.justabot"
+          git push --follow-tags
